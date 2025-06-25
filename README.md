@@ -1,124 +1,49 @@
-# Monad flavored Hardhat starter
+# HARDHAT-MONAD
 
-This project demonstrates a basic Hardhat use case optimized for Monad. It comes with a sample contract, a test for that contract, and a Hardhat Ignition module that deploys that contract.
+A Monad testnet swap DEX using Hardhat.
 
-## Project Structure
+## Overview
+This project demonstrates a decentralized exchange (DEX) swap on the Monad testnet using Hardhat, TypeScript, and Solidity. It includes scripts and contracts for interacting with Uniswap V2 and Universal Routers, and provides a test script for simulating token swaps between WMON and USDC.
 
-```
-hardhat-monad/
-├── contracts/             # Smart contract source files
-│   └── Lock.sol           # Sample time-locked wallet contract
-├── ignition/              # Hardhat Ignition deployment modules
-│   └── modules/
-│       └── Lock.ts        # Deployment configuration for Lock contract
-├── test/                  # Test files
-│   └── Lock.ts            # Tests for the Lock contract
-├── .env.example           # Example environment variables file
-├── hardhat.config.ts      # Hardhat configuration
-├── package.json           # Project dependencies
-└── tsconfig.json          # TypeScript configuration
-```
+## Features
+- Swap tokens on Monad testnet using Uniswap V2 and Universal Routers
+- Hardhat-based development and deployment
+- TypeScript scripts for testing and automation
+- Example contracts and deployment modules
 
 ## Getting Started
 
 ### Prerequisites
-
-- Node.js (v16+)
+- Node.js (v16+ recommended)
+- Yarn or npm
+- Hardhat
 
 ### Installation
+```bash
+npm install
+# or
+yarn install
+```
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/portdeveloper/hardhat-monad.git
-   cd hardhat-monad
-   ```
+### Configuration
+- Copy `.env.example` to `.env` and set your private key and RPC URL for Monad testnet.
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Create a `.env` file based on `.env.example`:
-   ```bash
-   cp .env.example .env
-   ```
-
-4. Add your private key to the `.env` file:
-   ```
-   PRIVATE_KEY=your_private_key_here
-   ```
-   ⚠️ **IMPORTANT**: Never commit your `.env` file or expose your private key.
-
-## Testing
-
-Run tests with Hardhat:
-
+### Running Tests
 ```bash
 npx hardhat test
 ```
 
-## How to deploy your contract
-
-This project uses Hardhat Ignition for deployments, which makes it easy to manage complex deployment procedures.
-
-### Local Deployment (Hardhat Network)
-
-Run hardhat node by running:
-
+### Running the Swap Test Script
 ```bash
-npx hardhat node
+npx ts-node scripts/test-monadswap.ts
 ```
 
-To deploy the contract to the local hardhat node, run the following command:
-
-```bash
-npx hardhat ignition deploy ignition/modules/Lock.ts
-```
-
-### Monad Testnet Deployment
-
-```bash
-npx hardhat ignition deploy ignition/modules/Lock.ts --network monadTestnet
-```
-
-To redeploy the same code to a different address use the command below:
-
-```bash
-npx hardhat ignition deploy ignition/modules/Lock.ts --network monadTestnet --reset
-```
-
-You can customize deployment parameters:
-
-```bash
-npx hardhat ignition deploy ignition/modules/Lock.ts --network monadTestnet --parameters '{"unlockTime": 1893456000, "lockedAmount": "1000000000000000"}'
-```
-
-## How to verify your contract
-
-This project is configured to use Sourcify for contract verification on Monad. After deployment, you can verify your contract with:
-
-```bash
-npx hardhat verify <contract_address> --network monadTestnet
-```
-
-Once verified, you can view your contract on the [Monad Explorer](https://testnet.monadexplorer.com).
-
-## Customizing the Lock Contract
-
-The sample Lock contract is a simple time-locked wallet that:
-- Accepts ETH during deployment
-- Locks funds until a specified timestamp
-- Allows only the owner to withdraw once the time has passed
-
-You can modify the unlock time in `ignition/modules/Lock.ts` or pass it as a parameter during deployment.
-
-## Got questions?
-
-- Refer to [docs.monad.xyz](https://docs.monad.xyz) for Monad-specific documentation
-- Visit [Hardhat Documentation](https://hardhat.org/docs) for Hardhat help
-- Check [Hardhat Ignition Guide](https://hardhat.org/ignition/docs/getting-started) for deployment assistance
+## Project Structure
+- `contracts/` - Solidity smart contracts
+- `scripts/` - Deployment and test scripts
+- `test/` - Test files
+- `artifacts/`, `cache/` - Build artifacts (gitignored)
 
 ## License
-
-This project is licensed under the MIT License.
+MIT
 
